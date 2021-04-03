@@ -19,6 +19,7 @@ export default class UserService {
 
             if (username == undefined || password == undefined) {
                 res.status(501);
+                res.json({});
                 return;
             }
 
@@ -26,6 +27,7 @@ export default class UserService {
 
             if (user == undefined) {
                 res.status(404);
+                res.json({});
                 return;
             }
 
