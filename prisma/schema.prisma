@@ -9,7 +9,7 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
-s
+
 model User {
   userId Int @default(autoincrement()) @id
   uuid  String @default(uuid()) @unique
