@@ -12,8 +12,8 @@ export default class UserService {
         this.client = client;
         this.router = Router();
 
-        // Login: GET username, password
-        this.router.get('/', async (req: Request, res: Response) => {
+        // Login: POST username, password
+        this.router.post('/', async (req: Request, res: Response) => {
             let username = req.header('username');
             let password = req.header('password');
 
