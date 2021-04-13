@@ -36,6 +36,10 @@ export default class UserService {
             res.json(session);
         });
 
+        this.router.get('/', async (req: Request, res: Response) => {
+            let session = req.header('token');
+        });
+
         this.app.use('/users', this.router);
     }
 
