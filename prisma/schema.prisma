@@ -35,7 +35,7 @@ model Session {
 
 model Business {
   uuid               String              @id @default(uuid())
-  name               String
+  name               String              @unique
   address            String
   location           String
   activated          Boolean
