@@ -87,10 +87,17 @@ export default class UserService {
             where: {
                 username: username,
                 password: password
+            },
+            include: {
+                activation: true
             }
         });
 
         if (user === null) {
+            return;
+        }
+
+        if (user.activation == undefined) {
             return;
         }
 
