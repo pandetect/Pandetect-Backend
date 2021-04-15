@@ -11,17 +11,86 @@ generator client {
 }
 
 model User {
-  userId Int @default(autoincrement()) @id
-  uuid  String @default(uuid()) @unique
-  username String
-  password String
-  email String @unique
-  active Boolean @default(false)
+  uuid         String      @id @default(uuid())
+  username     String
+  password     String
+  email        String      @unique
+  business     Business?   @relation(fields: [businessUuid], references: [uuid])
+  activation   Activation?
+  businessUuid String?
+}
+
+model Activation {
+  uuid     String @id @default(uuid())
+  user     User   @relation(fields: [userUuid], references: [uuid])
+  userUuid String
 }
 
 model Session {
-  sessionId Int @default(autoincrement()) @id
-  token String @default(uuid())
+  sessionId      Int      @id @default(autoincrement())
+  token          String   @default(uuid())
   expirationDate DateTime
-  creationDate DateTime @default(now())
+  creationDate   DateTime @default(now())
+}
+
+model Business {
+  uuid               String              @id @default(uuid())
+  name               String              @unique
+  address            String
+  location           String
+  activated          Boolean
+  owner              User[]
+  devices            Device[]
+  businessStatistics BusinessStatistic[]
+}
+
+model Device {
+  uuid         String   @id @default(uuid())
+  macAddress   String
+  localAddress String
+  cameras      Camera[]
+  business     Business @relation(fields: [businessUuid], references: [uuid])
+  businessUuid String
+}
+
+model Camera {
+  uuid            String           @id @default(uuid())
+  deviceUuid      String?
+  Device          Device?          @relation(fields: [deviceUuid], references: [uuid])
+  frameStatistics FrameStatistic[]
+}
+
+// Statistics from here
+model FrameStatistic {
+  uuid                String           @id @default(uuid())
+  personalAnalysis    Json[]
+  masked              Int
+  unmasked            Int
+  semimasked          Int
+  creationDate        DateTime         @default(now())
+  Camera              Camera?          @relation(fields: [cameraUuid], references: [uuid])
+  cameraUuid          String?
+  CameraStatistcs     CameraStatistcs? @relation(fields: [cameraStatistcsUuid], references: [uuid])
+  cameraStatistcsUuid String?
+}
+
+model CameraStatistcs {
+  uuid                       String                  @id @default(uuid())
+  frameStatistics            FrameStatistic[]
+  OrganizationStatistics     OrganizationStatistics? @relation(fields: [organizationStatisticsUuid], references: [uuid])
+  organizationStatisticsUuid String?
+}
+
+model OrganizationStatistics {
+  uuid                  String             @id @default(uuid())
+  cameraStatistics      CameraStatistcs[]
+  BusinessStatistic     BusinessStatistic? @relation(fields: [businessStatisticUuid], references: [uuid])
+  businessStatisticUuid String?
+}
+
+model BusinessStatistic {
+  uuid                   String                   @id @default(uuid())
+  Business               Business?                @relation(fields: [businessUuid], references: [uuid])
+  businessUuid           String?
+  organizationStatistics OrganizationStatistics[]
 }

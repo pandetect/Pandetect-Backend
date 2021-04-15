@@ -12,8 +12,8 @@ export default class UserService {
         this.client = client;
         this.router = Router();
 
-        // Login: GET username, password
-        this.router.get('/', async (req: Request, res: Response) => {
+        // Login: POST username, password
+        this.router.post('/', async (req: Request, res: Response) => {
             let username = req.header('username');
             let password = req.header('password');
 
@@ -34,6 +34,10 @@ export default class UserService {
             const session = await this.createSession(user);
 
             res.json(session);
+        });
+
+        this.router.get('/', async (req: Request, res: Response) => {
+            let session = req.header('token');
         });
 
         this.app.use('/users', this.router);
