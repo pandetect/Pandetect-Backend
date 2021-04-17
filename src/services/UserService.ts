@@ -48,7 +48,7 @@ export default class UserService {
 
             if (username == undefined || password == undefined ) {
                 res.status(501);
-                res.json({});
+                res.json("Bad request");
                 return;
             }
 
@@ -56,7 +56,7 @@ export default class UserService {
 
             if (user == undefined) {
                 res.status(404);
-                res.json({});
+                res.json("Credentials are incorrect or account is not activated");
                 return;
             }
 
