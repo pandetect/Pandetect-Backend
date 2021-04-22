@@ -22,8 +22,8 @@ model User {
 
 model Activation {
   uuid     String @id @default(uuid())
-  user     User   @relation(fields: [userUuid], references: [uuid])
-  userUuid String
+  user     User?   @relation(fields: [userUuid], references: [uuid])
+  userUuid String?
 }
 
 model Session {
