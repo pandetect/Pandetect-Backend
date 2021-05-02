@@ -16,21 +16,26 @@ model User {
   password     String
   email        String      @unique
   business     Business?   @relation(fields: [businessUuid], references: [uuid])
-  activation   Activation?
+  active       Boolean      @default(false)
+  session      Session?   
+  sessionToken String?     
   businessUuid String?
+  admin        Boolean @default(false)
 }
 
-model Activation {
-  uuid     String @id @default(uuid())
-  user     User   @relation(fields: [userUuid], references: [uuid])
-  userUuid String
-}
+// model Activation {
+//   uuid     String @id @default(uuid())
+//   user     User   @relation(fields: [userUuid], references: [uuid])
+//   userUuid String
+// }
 
 model Session {
   sessionId      Int      @id @default(autoincrement())
   token          String   @default(uuid())
   expirationDate DateTime
   creationDate   DateTime @default(now())
+  user     User   @relation(fields: [userUuid], references: [uuid])
+  userUuid String
 }
 
 model Business {
