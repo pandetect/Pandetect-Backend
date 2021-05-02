@@ -15,8 +15,8 @@ export default class StatisticsService{
         
         this.router.get('/:placename', async(req: Request, res: Response) =>{
             console.log("place name is: ", req.params.placename);
-            //let statistics = await this.getStatistics(req.params.placeName);
-            //return res.json(req.params.placename);
+
+
             if ( req.params.placename == undefined){
                 res.status(400);
                 return res.send("Invalid placename something");

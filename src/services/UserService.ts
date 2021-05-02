@@ -58,7 +58,7 @@ export default class UserService {
             console.log(req.body)
             if (username == undefined || password == undefined ) {
                 res.status(501);
-                res.json({});
+                res.json("Bad request");
                 return;
             }
 
@@ -66,7 +66,7 @@ export default class UserService {
             console.log("user here ", user);
             if (user == undefined) {
                 res.status(404);
-                res.json({});
+                res.json("Credentials are incorrect or account is not activated");
                 return;
             }
 
@@ -154,7 +154,7 @@ export default class UserService {
     }
     private async createSession(newUser: User): Promise<Session | undefined> {
         let expDate = moment().add(1, 'day').format();
-        console.log(newUser.uuid);
+        // console.log(newUser.uuid);
         const session = await this.client.session.create({
             data: {
                 expirationDate: expDate,

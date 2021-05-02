@@ -11,16 +11,16 @@ generator client {
 }
 
 model User {
-  uuid         String      @id @default(uuid())
+  uuid         String    @id @default(uuid())
   username     String
   password     String
-  email        String      @unique
-  business     Business?   @relation(fields: [businessUuid], references: [uuid])
-  active       Boolean      @default(false)
-  session      Session?   
-  sessionToken String?     
+  email        String    @unique
+  business     Business? @relation(fields: [businessUuid], references: [uuid])
+  active       Boolean   @default(false)
+  session      Session[]
+  sessionToken String[]
   businessUuid String?
-  admin        Boolean @default(false)
+  admin        Boolean   @default(false)
 }
 
 // model Activation {
@@ -34,8 +34,8 @@ model Session {
   token          String   @default(uuid())
   expirationDate DateTime
   creationDate   DateTime @default(now())
-  user     User   @relation(fields: [userUuid], references: [uuid])
-  userUuid String
+  user           User     @relation(fields: [userUuid], references: [uuid])
+  userUuid       String
 }
 
 model Business {
