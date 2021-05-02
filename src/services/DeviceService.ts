@@ -38,6 +38,26 @@ export default class UserService {
             let macAddresss: number= Number(res.header('macadress'));
 
         });
+
+        this.router.get('/macaddress', async(req,res)=>{
+            let mac: string = req.body.macaddress;
+            const business = await this.client.device.findFirst({
+                where:{
+                    macAddress: mac
+                },
+                include:{
+                    business: true
+                }
+            });
+            if(business == null){
+                res.status(400);
+                res.json("unable to find device")
+            }
+            else{
+                res.status(200);
+                res.json(business);
+            }
+        });
         // GET: Get device
         this.router.get('/:uuid', async(req, res)=>{
             let uuid: string = String(req.params.uuid);
