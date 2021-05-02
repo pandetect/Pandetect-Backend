@@ -5,7 +5,7 @@
   "main": "./dist/Main.js",
   "scripts": {
     "dev": "npx tsc && node .",
-    "start": "npm i && npx prisma generate && npx tsc && nodemon ."
+    "start": "npm i && npx prisma generate && npx tsc && node ."
   },
   "keywords": [],
   "author": "",

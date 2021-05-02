@@ -154,7 +154,7 @@ export default class UserService {
     }
     private async createSession(newUser: User): Promise<Session | undefined> {
         let expDate = moment().add(1, 'day').format();
-        console.log(newUser.uuid);
+        // console.log(newUser.uuid);
         const session = await this.client.session.create({
             data: {
                 expirationDate: expDate,
