@@ -13,7 +13,7 @@ export default class UserService {
         this.app = app;
         this.client = client;
         this.router = Router();
-
+//test
         // GET: Places
         this.router.get('/', async(req: Request, res: Response) =>{
             let places = await this.client.business.findMany(); //get all business
