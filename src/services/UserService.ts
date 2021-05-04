@@ -30,25 +30,23 @@ export default class UserService {
             let username = req.body.username;
             let password = req.body.password;
             let email = req.body.email;
-            
+            console.log(username, password, email) 
             if (username == undefined || password == undefined || email == undefined) {
                 res.status(501);
                 res.json({});
                 return;
             }
             const user = await this.userExist(username, password);
-
+            console.log("user is here:" , user)
             if (user == undefined) {
                 res.status(404);
                 res.json("User with given credentials already exists, please try another name!");
-                return;
             }
             
             const newUser = await this.createUser(username, password, email);
             if(newUser != undefined){
                 res.status(200);
                 res.json("User created successfuly");
-                return;
             }
         });
         // Login: GET username, password
@@ -123,7 +121,7 @@ export default class UserService {
             where: {
                 username: username,
                 password: password,
-                active: true
+                
             }
         });
 
