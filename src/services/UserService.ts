@@ -50,7 +50,7 @@ export default class UserService {
             }
         });
         // Login: GET username, password
-        this.router.get('/login', async (req: Request, res: Response) => {
+        this.router.post('/login', async (req: Request, res: Response) => {
             let username = req.body.username;
             let password = req.body.password;
             console.log(req.body)
