@@ -53,6 +53,7 @@ export default class UserService {
         this.router.post('/login', async (req: Request, res: Response) => {
             let username = req.body.username;
             let password = req.body.password;
+
             console.log(req.body)
             if (username == undefined || password == undefined ) {
                 res.status(501);

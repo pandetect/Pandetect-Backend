@@ -6,6 +6,7 @@ import PlacesService from './services/LocationService';
 import DeviceService from './services/DeviceService';
 import CameraService from './services/CameraService';
 import BusinessService from './services/BusinessService';
+import bodyparser from 'body-parser';
 
 const app = express();
 const client = new PrismaClient();
@@ -16,6 +17,7 @@ app.use(
   })
 )
 app.use(express.json())
+app.use(bodyparser.json())
 // All services here
 const userService = new UserService(app, client);
 const statisticsService = new StatisticsService(app, client);
