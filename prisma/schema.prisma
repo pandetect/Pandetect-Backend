@@ -10,6 +10,18 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model Statistics {
+  uuid             String   @id @default(uuid())
+  ipAddress        String
+  startDate      DateTime 
+  endDate        DateTime 
+  avgDistanceViolationDuration Int // at least 2 people violation starts timer
+  avgNumberOfUnmasked     Int
+  avgNumberOfMasked Int 
+  avgNumberOfUncertain Int
+  avgNumberOfPeople Int 
+  numberOfFrames Int // how many frames did camera send
+}
 model User {
   uuid         String    @id @default(uuid())
   username     String
@@ -23,11 +35,7 @@ model User {
   admin        Boolean   @default(false)
 }
 
-// model Activation {
-//   uuid     String @id @default(uuid())
-//   user     User   @relation(fields: [userUuid], references: [uuid])
-//   userUuid String
-// }
+
 
 model Session {
   sessionId      Int      @id @default(autoincrement())
@@ -43,7 +51,7 @@ model Business {
   name       String   @unique
   address    String
   latitude   String?
-  longitude String?
+  longitude  String?
   location   String
   activated  Boolean
   owner      User[]
@@ -83,23 +91,3 @@ model FrameStatistic {
   // cameraStatistcsUuid String?
 }
 
-// model CameraStatistcs {
-//   uuid                       String                  @id @default(uuid())
-//   frameStatistics            FrameStatistic[]
-//   OrganizationStatistics     OrganizationStatistics? @relation(fields: [organizationStatisticsUuid], references: [uuid])
-//   organizationStatisticsUuid String?
-// }
-
-// model OrganizationStatistics {
-//   uuid                  String             @id @default(uuid())
-//   cameraStatistics      CameraStatistcs[]
-//   BusinessStatistic     BusinessStatistic? @relation(fields: [businessStatisticUuid], references: [uuid])
-//   businessStatisticUuid String?
-// }
-
-// model BusinessStatistic {
-//   uuid                   String                   @id @default(uuid())
-//   Business               Business?                @relation(fields: [businessUuid], references: [uuid])
-//   businessUuid           String?
-//   organizationStatistics OrganizationStatistics[]
-// }

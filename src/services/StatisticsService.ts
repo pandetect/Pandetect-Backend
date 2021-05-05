@@ -1,4 +1,4 @@
-import { PrismaClient, Session, User,  Business } from '.prisma/client';
+import { PrismaClient, Session, User,  Business, Statistics } from '.prisma/client';
 import {Express, Router, Response, Request, json} from 'express';
 import moment from 'moment';
 import { textChangeRangeIsUnchanged } from 'typescript';
@@ -13,6 +13,41 @@ export default class StatisticsService{
         this.client = client;
         this.router = Router();
         
+
+        this.router.post('/', async(req: Request, res: Response) =>{
+            let ipAddress: string = String(req.body.ipAddress);
+            let startDate: Date= new Date(req.body.startDate);
+            let endDate: Date=  new Date(req.body.endDate);
+
+            let avgDistanceViolationDuration: number= Number(req.body.avgDistanceViolationDuration);
+            let avgNumberOfUnmasked: number= Number(req.body.avgNumberOfUnmasked);
+            let avgNumberOfMasked : number= Number(req.body.avgNumberOfMasked);
+            let avgNumberOfUncertain: number= Number(req.body.avgNumberOfUncertain);
+            let avgNumberOfPeople: number= Number(req.body.avgNumberOfPeople);
+            let numberOfFrames: number= Number(req.body.numberOfFrames);
+            
+            const stat = await this.client.statistics.create({
+                data:{
+                    ipAddress: ipAddress,
+                    startDate: startDate,
+                    endDate: endDate,
+                    avgDistanceViolationDuration: avgDistanceViolationDuration,
+                    avgNumberOfUnmasked: avgNumberOfUnmasked,
+                    avgNumberOfMasked: avgNumberOfMasked,
+                    avgNumberOfUncertain: avgNumberOfUncertain,
+                    avgNumberOfPeople: avgNumberOfPeople,
+                    numberOfFrames: numberOfFrames
+                }
+            });
+            if(stat == undefined || stat == null){
+                res.status(400);
+                res.json("unable to create status")
+            }
+            res.status(200);
+            res.json("Successfuly created stat")
+
+        });
+
         this.router.get('/:placename', async(req: Request, res: Response) =>{
             console.log("place name is: ", req.params.placename);
 
