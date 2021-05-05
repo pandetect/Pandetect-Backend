@@ -38,7 +38,7 @@ export default class UserService {
             }
             const user = await this.userExist(username, password);
             console.log("user is here:" , user)
-            if (user == undefined) {
+            if (user != undefined) {
                 res.status(404);
                 res.json("User with given credentials already exists, please try another name!");
             }
