@@ -39,15 +39,15 @@ model Session {
 }
 
 model Business {
-  uuid      String   @id @default(uuid())
-  name      String   @unique
-  address   String
+  uuid       String   @id @default(uuid())
+  name       String   @unique
+  address    String
   latitude   String?
-  longtitude String?
-  location  String
-  activated Boolean
-  owner     User[]
-  devices   Device[]
+  longitude String?
+  location   String
+  activated  Boolean
+  owner      User[]
+  devices    Device[]
   // businessStatistics BusinessStatistic[]
 }
 
