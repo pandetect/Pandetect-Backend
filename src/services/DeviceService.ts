@@ -38,7 +38,7 @@ export default class UserService {
             let macAddresss: number= Number(res.header('macadress'));
 
         });
-
+        //test
         this.router.get('/macaddress', async(req,res)=>{
             let mac: string = req.body.macaddress;
             const business = await this.client.device.findFirst({

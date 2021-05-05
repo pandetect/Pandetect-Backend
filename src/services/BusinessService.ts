@@ -13,6 +13,7 @@ export default class UserService {
         this.client = client;
         this.router = Router();
 
+
         // GET: Business
         this.router.get('/', async(req: Request, res: Response) =>{
             let sessionToken: string = String(req.header("token"));
