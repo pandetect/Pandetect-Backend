@@ -1,4 +1,4 @@
-import { PrismaClient, Session, User,  Business, Statistics } from '.prisma/client';
+import { PrismaClient, Session, User,  Business, Statistics, prisma } from '.prisma/client';
 import {Express, Router, Response, Request, json} from 'express';
 import moment from 'moment';
 import { textChangeRangeIsUnchanged } from 'typescript';
@@ -12,6 +12,24 @@ export default class StatisticsService{
         this.app = app;
         this.client = client;
         this.router = Router();
+
+        this.router.get('/mobilestats', async (req: Request, res: Response) => {
+            let ipAddress = '192.168.1.22'; // requested ip address
+
+            let stat = await this.client.statistics.findFirst({
+                where: {
+                    ipAddress: ipAddress
+                },
+                orderBy: {
+                    endDate: 'desc'
+                }
+            });
+
+
+            console.log(stat);
+
+            res.status(200).json(stat);
+        });
         
 
         this.router.post('/', async(req: Request, res: Response) =>{
