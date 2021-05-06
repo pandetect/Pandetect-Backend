@@ -18,7 +18,6 @@ export default class StatisticsService{
             let ipAddress: string = String(req.body.ipAddress);
             let startDate: Date= new Date(req.body.startDate);
             let endDate: Date=  new Date(req.body.endDate);
-
             let avgDistanceViolationDuration: number= Number(req.body.avgDistanceViolationDuration);
             let avgNumberOfUnmasked: number= Number(req.body.avgNumberOfUnmasked);
             let avgNumberOfMasked : number= Number(req.body.avgNumberOfMasked);
@@ -43,6 +42,7 @@ export default class StatisticsService{
                 res.status(400);
                 res.json("unable to create status")
             }
+            console.log(stat);
             res.status(200);
             res.json("Successfuly created stat")
 
