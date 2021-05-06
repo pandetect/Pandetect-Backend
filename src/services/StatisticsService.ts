@@ -15,10 +15,12 @@ export default class StatisticsService{
         
 
         this.router.post('/', async(req: Request, res: Response) =>{
+            console.log('Test test tesat');
+            
             let ipAddress: string = String(req.body.ipAddress);
             let startDate: Date= new Date(req.body.startDate);
             let endDate: Date=  new Date(req.body.endDate);
-            let avgDistanceViolationDuration: number= Number(req.body.avgDistanceViolationDuration);
+            let avgDistanceViolationDuration: number  = Number(req.body.avgDistanceViolationDuration);
             let avgNumberOfUnmasked: number= Number(req.body.avgNumberOfUnmasked);
             let avgNumberOfMasked : number= Number(req.body.avgNumberOfMasked);
             let avgNumberOfUncertain: number= Number(req.body.avgNumberOfUncertain);

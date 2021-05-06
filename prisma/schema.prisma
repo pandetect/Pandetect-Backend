@@ -11,17 +11,18 @@ generator client {
 }
 
 model Statistics {
-  uuid             String   @id @default(uuid())
-  ipAddress        String
-  startDate      DateTime 
-  endDate        DateTime 
-  avgDistanceViolationDuration Int // at least 2 people violation starts timer
-  avgNumberOfUnmasked     Int
-  avgNumberOfMasked Int 
-  avgNumberOfUncertain Int
-  avgNumberOfPeople Int 
-  numberOfFrames Int // how many frames did camera send
+  uuid                         String   @id @default(uuid())
+  ipAddress                    String
+  startDate                    DateTime
+  endDate                      DateTime
+  avgDistanceViolationDuration Float // at least 2 people violation starts timer
+  avgNumberOfUnmasked          Float
+  avgNumberOfMasked            Float
+  avgNumberOfUncertain         Float
+  avgNumberOfPeople            Float
+  numberOfFrames               Float // how many frames did camera send
 }
+
 model User {
   uuid         String    @id @default(uuid())
   username     String
@@ -35,8 +36,6 @@ model User {
   admin        Boolean   @default(false)
 }
 
-
-
 model Session {
   sessionId      Int      @id @default(autoincrement())
   token          String   @default(uuid())
@@ -47,15 +46,15 @@ model Session {
 }
 
 model Business {
-  uuid       String   @id @default(uuid())
-  name       String   @unique
-  address    String
-  latitude   String?
-  longitude  String?
-  location   String
-  activated  Boolean
-  owner      User[]
-  devices    Device[]
+  uuid      String   @id @default(uuid())
+  name      String   @unique
+  address   String
+  latitude  String?
+  longitude String?
+  location  String
+  activated Boolean
+  owner     User[]
+  devices   Device[]
   // businessStatistics BusinessStatistic[]
 }
 
@@ -90,4 +89,3 @@ model FrameStatistic {
   // CameraStatistcs     CameraStatistcs? @relation(fields: [cameraStatistcsUuid], references: [uuid])
   // cameraStatistcsUuid String?
 }
-
