@@ -47,7 +47,7 @@ export default class StatisticsService{
             res.json(statArray);
         });
 
-        this.router.post('/mobilestats', async (req: Request, res: Response) => {
+        this.router.get('/mobilestats', async (req: Request, res: Response) => {
             let ipAddress = '192.168.1.22';
 
             let stat = await this.client.statistics.findFirst({
