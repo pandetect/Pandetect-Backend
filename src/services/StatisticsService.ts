@@ -48,8 +48,8 @@ export default class StatisticsService{
         });
 
         this.router.post('/mobilestats', async (req: Request, res: Response) => {
-            let ipAddress: string = String(req.body.ipAddress);
-            
+            let ipAddress = '192.168.1.22';
+
             let stat = await this.client.statistics.findFirst({
                 where: {
                     ipAddress: ipAddress
