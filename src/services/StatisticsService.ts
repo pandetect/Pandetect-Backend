@@ -103,7 +103,7 @@ export default class StatisticsService{
                     avgNumberOfUncertain: avgNumberOfUncertain,
                     avgNumberOfPeople: avgNumberOfPeople,
                     numberOfFrames: numberOfFrames,
-                    uuid: businessUuid
+                    businessUuid: businessUuid
                 }
             });
 
