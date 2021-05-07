@@ -80,7 +80,7 @@ export default class StatisticsService{
         // });
         this.router.post('/', async(req: Request, res: Response) =>{
             console.log('Test test tesat');
-            
+            let businessUuid: string = String(req.body.businesUuid);
             let ipAddress: string = String(req.body.ipAddress);
             let startDate: Date= new Date(req.body.startDate);
             let endDate: Date=  new Date(req.body.endDate);
@@ -90,6 +90,7 @@ export default class StatisticsService{
             let avgNumberOfUncertain: number= Number(req.body.avgNumberOfUncertain);
             let avgNumberOfPeople: number= Number(req.body.avgNumberOfPeople);
             let numberOfFrames: number= Number(req.body.numberOfFrames);
+            
             
             const stat = await this.client.statistics.create({
                 data:{
@@ -101,7 +102,8 @@ export default class StatisticsService{
                     avgNumberOfMasked: avgNumberOfMasked,
                     avgNumberOfUncertain: avgNumberOfUncertain,
                     avgNumberOfPeople: avgNumberOfPeople,
-                    numberOfFrames: numberOfFrames
+                    numberOfFrames: numberOfFrames,
+                    uuid: businessUuid
                 }
             });
 
