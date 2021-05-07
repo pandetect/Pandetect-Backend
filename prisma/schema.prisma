@@ -21,6 +21,9 @@ model Statistics {
   avgNumberOfUncertain         Float
   avgNumberOfPeople            Float
   numberOfFrames               Float // how many frames did camera send
+  business                     Business? @relation(fields: [businessUuid], references: [uuid])
+  businessUuid                 String?
+
 }
 
 model User {
@@ -55,6 +58,7 @@ model Business {
   activated Boolean
   owner     User[]
   devices   Device[]
+  statistics Statistics[]
   // businessStatistics BusinessStatistic[]
 }
 

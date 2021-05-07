@@ -13,25 +13,55 @@ export default class StatisticsService{
         this.client = client;
         this.router = Router();
 
-        this.router.get('/mobilestats', async (req: Request, res: Response) => {
-            let ipAddress = '192.168.1.22'; // requested ip address
-
-            let stat = await this.client.statistics.findFirst({
-                where: {
-                    ipAddress: ipAddress
+        this.router.post('/mobilestats', async (req: Request, res: Response) => {
+            let businessUuid: string = String(req.body.businessUuid);
+            let ipAddress: string = String(req.body.ipAddress);
+            let start: string = String(req.body.startDate);
+            let end: string = String(req.body.endDate);
+            let business = await this.client.business.findUnique({
+                where:{
+                    uuid: businessUuid
                 },
-                orderBy: {
-                    endDate: 'desc'
+                include:{
+                    statistics: true
                 }
             });
+            if(business == undefined || business == null  ){
+                res.status(400)
+                res.json("Internal error")
+            }
+
+            console.log(business?.statistics);
+
+            
+            // let stat = await this.client.statistics.findFirst({
+            //     where: {
+            //         ipAddress: ipAddress
+            //     },
+            //     orderBy: {
+            //         endDate: 'desc'
+            //     }
+            // });
 
 
-            console.log(stat);
+            // console.log(stat);
 
-            res.status(200).json(stat);
+            // res.status(200).json(stat);
         });
         
 
+        // this.router.post('/test', async(req: Request, res: Response) =>{
+        //         const result = await this.client.statistics.findMany({
+        //             where:{
+        //                 startDate:{
+        //                     gte: new Date(),
+                            
+        //                 }
+        //             }
+        //         });
+            
+
+        // });
         this.router.post('/', async(req: Request, res: Response) =>{
             console.log('Test test tesat');
             
@@ -58,6 +88,7 @@ export default class StatisticsService{
                     numberOfFrames: numberOfFrames
                 }
             });
+
             if(stat == undefined || stat == null){
                 res.status(400);
                 res.json("unable to create status")
