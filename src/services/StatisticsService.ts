@@ -18,6 +18,10 @@ export default class StatisticsService{
             let ipAddress: string = String(req.body.ipAddress);
             let start: string = String(req.body.startDate);
             let end: string = String(req.body.endDate);
+
+            let startDate = new Date(start);
+            let endDate= new Date(end);
+
             let business = await this.client.business.findUnique({
                 where:{
                     uuid: businessUuid
@@ -31,8 +35,17 @@ export default class StatisticsService{
                 res.json("Internal error")
             }
 
-            console.log(business?.statistics);
-
+            let statArray = business?.statistics.filter((value)=>{
+                if(value.startDate > startDate && value.startDate < endDate){
+                    return true;
+                }
+                else{
+                    return false
+                }
+            });
+            
+            console.log(statArray);
+            res.json(statArray);
             
             // let stat = await this.client.statistics.findFirst({
             //     where: {
