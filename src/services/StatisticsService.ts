@@ -91,7 +91,7 @@ export default class StatisticsService{
             let avgNumberOfPeople: number= Number(req.body.avgNumberOfPeople);
             let numberOfFrames: number= Number(req.body.numberOfFrames);
             
-            
+            console.log("business id")
             const stat = await this.client.statistics.create({
                 data:{
                     ipAddress: ipAddress,
