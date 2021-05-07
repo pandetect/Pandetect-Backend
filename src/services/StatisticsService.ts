@@ -15,7 +15,6 @@ export default class StatisticsService{
 
         this.router.post('/mobilegraph', async (req: Request, res: Response) => {
             let businessUuid: string = String(req.body.businessUuid);
-            // let ipAddress: string = String(req.body.ipAddress);
             let start: string = String(req.body.startDate);
             let end: string = String(req.body.endDate);
 
@@ -49,6 +48,8 @@ export default class StatisticsService{
         });
 
         this.router.post('/mobilestats', async (req: Request, res: Response) => {
+            let ipAddress: string = String(req.body.ipAddress);
+            
             let stat = await this.client.statistics.findFirst({
                 where: {
                     ipAddress: ipAddress
