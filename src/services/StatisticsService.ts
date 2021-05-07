@@ -80,7 +80,7 @@ export default class StatisticsService{
         // });
         this.router.post('/', async(req: Request, res: Response) =>{
             console.log('Test test tesat');
-            let businessUuid: string = String(req.body.businesUuid);
+            let businessUuid: string = String(req.body.businessUuid);
             let ipAddress: string = String(req.body.ipAddress);
             let startDate: Date= new Date(req.body.startDate);
             let endDate: Date=  new Date(req.body.endDate);
