@@ -20,7 +20,7 @@ export default class StatisticsService{
 
             let startDate = new Date(start);
             let endDate= new Date(end);
-
+            console.log("startDate: ", startDate , "endDate: ", endDate, "businesUUid", businessUuid);
             let business = await this.client.business.findUnique({
                 where:{
                     uuid: businessUuid
@@ -42,12 +42,6 @@ export default class StatisticsService{
                     return false
                 }
             });
-<<<<<<< HEAD
-            
-            console.log(statArray);
-            res.json(statArray);
-=======
->>>>>>> prod
             
             console.log(statArray);
             res.json(statArray);
